@@ -1,21 +1,34 @@
+/**
+ * Return the values from the form inputs
+ * @returns {{title: (*|jQuery), year: (*|jQuery)}}
+ */
 function getValuesFromInputs() {
-    var movie = {
+    return {
         title: $('input[name=title]').val(),
         year: $('input[name=year]').val()
     };
-
-    return movie;
 }
 
+/**
+ * Changes the text in the button and adding the attr disabled
+ * @returns void
+ */
 function disableSearch() {
     $('button').text('Searching...');
     $('button').attr('disabled', 'disabled');
 }
 
+/**
+ * Brings back the text to the search button and remove disabled
+ */
 function enableSearch() {
     $('button').text('Search!').removeAttr('disabled');
 }
 
+/**
+ * Inject all the values to the DOM
+ * @param movie
+ */
 function writeMovieToDOM(movie) {
     $('.title').text(movie.Title);
     $('img').attr('src', movie.Poster);
@@ -42,9 +55,6 @@ function searchMovie(name) {
             alert('The movie you have searched has not been found');
             $('button').text('Search!');
             $('#movie').hide();
-
-
-            
         } else {
             enableSearch();
             writeMovieToDOM(movie);
@@ -52,10 +62,21 @@ function searchMovie(name) {
     });
 }
 
+/**
+ * Make the whole operation we need
+ * This function is describing the flow of the application itself
+ */
 function fetchMovie() {
+    // movie is now an object which includes the values from the inputs
     var movie = getValuesFromInputs();
+
+    // Disable the search button
     disableSearch();
+
+    // Actually make the ajax request
     searchMovie(movie.title);
+
+    // Reset the values in the inputs
     $('input[name=title]').val('');
     $('input[name=year]').val('');
 }
