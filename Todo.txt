@@ -1,0 +1,6 @@
+1. Remove the notes from CinemaApp.js
+2. Write the notes from scratch
+3. Read the explanations in github
+4. After writing the notes, earse the code
+5. Try writing the code from the notes
+6. Go back to step 3 and do it again

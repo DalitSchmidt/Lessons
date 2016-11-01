@@ -70,7 +70,7 @@ var CinemaApp = {
         this.disableSearch();
 
         // Actually make the ajax request
-        this.searchMovie(movie.title);
+        this.searchMovie(movie.title); 
 
         // Reset the values in the inputs
         $('input[name=title]').val('');

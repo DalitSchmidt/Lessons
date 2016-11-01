@@ -70,3 +70,16 @@ In another case, like the following:
 App.doSomething()
 ```
 'this' context will be App - because App is the one that called to 'doSomething' function
+
+---
+
+So, when calling doSomething() by clicking the button, 'this' context refers to the $('button');
+BUT, what if we want to tell doSomething "listen, i know that $('button') is the one that called you, and you should
+treat 'this' context as $('button'), but i want you to treat 'this' as something else"
+
+In a case like so, we have to use '$.proxy()', for instance
+```javascript
+$('button').on('click', $.proxy( this.doSomething, App ) );
+```
+
+this tell doSomething() that the context of 'this' MUST be the object 'App', that's what proxy meant for

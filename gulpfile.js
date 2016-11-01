@@ -20,19 +20,17 @@ gulp.task('js', function() {
 });
 
 gulp.task('watch',function(){
-    gulp.watch('./sass/**/*.scss', ['sass','compile']);
+    gulp.watch('./sass/**/*.scss', ['sass']);
     gulp.watch('./*.html', ['html']);
-    gulp.watch('./js/script.js', ['js']);
-    gulp.watch('./app/components/**/*.js', ['concatScripts']);
-    gulp.watch('./app/services/**/*.js', ['concatService']);
 });
 
 gulp.task('sass', function( cb ) {
     return gulp.src('./sass/style.scss')
-        .pipe(maps.init())
+        .pipe( maps.init() )
         .pipe( sass({ expended: true }).on( 'error', sass.logError ) )
-        .pipe(maps.write('./'))
-        .pipe( gulp.dest('./css'))
+        .pipe( maps.write('./') )
+        .pipe( gulp.dest('./css') )
+        .pipe( connect.reload() )
 });
 
 gulp.task('default', ['connect', 'watch']);
