@@ -42,19 +42,13 @@ function writeMovieToDOM(movie) {
     $('.actors').text(movie.Actors);
     $('.plot').text(movie.Plot);
     $('.language').text(movie.Language);
-    //$('.country').text(movie.Country);
-    //$('.awards').text(movie.Awards);
-    //$('.metascore').text(movie.Metascore);
-    //$('.imdbrating').text(movie.imdbRating);
-    //$('.imdbvotes').text(movie.imdbVotes);
 }
 
 function searchMovie(name) {
     $.getJSON('http://www.omdbapi.com/?t=' + name + '&plot=full&r=json', function(movie) {
         if (movie.Error) {
             alert('The movie you have searched has not been found');
-            $('button').text('Search!');
-            $('#movie').hide();
+            enableSearch();
         } else {
             enableSearch();
             writeMovieToDOM(movie);
