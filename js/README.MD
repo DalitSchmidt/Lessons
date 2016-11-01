@@ -58,7 +58,8 @@ This operation stick the 'click' event to the button and ask it to call this.doS
 When calling doSomething (after clicking the button), 'this' can refer either to the $('button') or the App
 why is that? because it depends who fired the doSomething() function.
 
-In the first case ```javascript
+In the first case
+```javascript
 $('button').on('click', this.doSomething );
 ```
 'this' context is the $('button'), because the '.on()' method called doSomething(), and the object that
