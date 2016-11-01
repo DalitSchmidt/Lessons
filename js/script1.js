@@ -42,6 +42,9 @@ function searchMovie(name) {
             alert('The movie you have searched has not been found');
             $('button').text('Search!');
             $('#movie').hide();
+
+
+            
         } else {
             enableSearch();
             writeMovieToDOM(movie);
