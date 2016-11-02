@@ -49,9 +49,11 @@ function searchMovie(name) {
         if (movie.Error) {
             alert('The movie you have searched has not been found');
             enableSearch();
+            $('#movie').hide();
         } else {
             enableSearch();
             writeMovieToDOM(movie);
+            $('#movie').show();
         }
     });
 }
