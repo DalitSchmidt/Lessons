@@ -1,8 +1,8 @@
-var CinemaApp = {
+CinemaApp = {
     /**
      * Bringing title and year values from input
      * **/
-    getValuesFromInputs: function() {
+    getValuesFromInput: function () {
         return {
             title: $('input[name=title]').val(),
             year: $('input[name=year]').val()
@@ -12,7 +12,7 @@ var CinemaApp = {
     /**
      * Change Text button to 'Searching...' and adding attribute of 'disabled' button
      * **/
-    disableSearch: function() {
+    disableSearch: function () {
         $('button').text('Searching...');
         $('button').attr('disabled', 'disabled');
     },
@@ -20,14 +20,15 @@ var CinemaApp = {
     /**
      * Replacing text 'Search!' button and removing the attribute of the button 'disabled'
      * **/
-    enableSearch: function() {
+    enableSearch: function () {
         $('button').text('Search!').removeAttr('disabled');
     },
 
     /**
      * Adding any entries (details) of the movie
      * **/
-    writeMovieToDOM: function(movie) {
+
+    addMovieToDom: function(movie) {
         $('.title').text(movie.Title);
         $('img').attr('src', movie.Poster);
         $('.year').text(movie.Year);
@@ -40,6 +41,7 @@ var CinemaApp = {
         $('.actors').text(movie.Actors);
         $('.plot').text(movie.Plot);
         $('.language').text(movie.Language);
+
     },
 
     /**
@@ -47,16 +49,16 @@ var CinemaApp = {
      * If an existing movie shows him in DOM using writeMovieToDOM function and performs the necessary changes (changing the text and removing the attribute of using the function 'EnableSearch'.
      * If the movie doesn't exist the function returns a message: "The movie you have searched has not been found", and makes the necessary changes (changing the text and removing the disabled attribute of the button) through the function 'enableSearch' and as there is information in the DOM is hiding it.
      * **/
-    searchMovie: function(name) {
+    searchMovie: function (name) {
         var self = this;
-        $.getJSON('http://www.omdbapi.com/?t=' + name + '&plot=full&r=json', function(movie) {
+        $.getJSON('http://www.omdbapi.com/?t=' + name + '&y=&plot=full&r=json', function (movie) {
             if (movie.Error) {
                 alert('The movie you have searched has not been found');
                 self.enableSearch();
                 $('#movie').hide();
             } else {
                 self.enableSearch();
-                self.writeMovieToDOM(movie);
+                self.addMovieToDom(movie);
                 $('#movie').show();
             }
         });
@@ -67,7 +69,7 @@ var CinemaApp = {
      * **/
     fetchMovie: function() {
         //movie is now an object that contains the values ​​from the input
-        var movie = this.getValuesFromInputs();
+        this.getValuesFromInput();
 
         // Disable the search button
         this.disableSearch();
@@ -78,15 +80,15 @@ var CinemaApp = {
         // Reset the values in the inputs
         $('input[name=title]').val('');
         $('input[name=year]').val('');
-    },
 
+    },
+        
     /**
      * The function 'BindEvent()' encompasses all elements of their events by clicking on the proxy function call function fetchMovie and operate the object CinemaApp("$('button').on('click', $.proxy( this.fetchMovie, CinemaApp ) );").
      The function 'BindEvents()' must register every object literal.
      * **/
-
     bindEvents: function () {
-        $('button').on('click', $.proxy( this.fetchMovie, CinemaApp ) );
+        $('button').on('click', $.proxy(this.fetchMovie, CinemaApp));
     },
 
     /**
@@ -94,10 +96,11 @@ var CinemaApp = {
      The function 'init()' must register every object literal.
      * **/
     init: function () {
-        console.log('Initializing the application');
-        this.bindEvents();
+      this.bindEvents();
     }
 };
 
 // Boot each object CinemaApp
-CinemaApp.init();
+$(document).ready(function(){
+    CinemaApp.init();
+});
