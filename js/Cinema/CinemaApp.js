@@ -69,7 +69,7 @@ CinemaApp = {
      * **/
     fetchMovie: function() {
         //movie is now an object that contains the values ​​from the input
-        this.getValuesFromInput();
+        var movie = this.getValuesFromInput();
 
         // Disable the search button
         this.disableSearch();
